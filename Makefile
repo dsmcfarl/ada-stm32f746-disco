@@ -4,7 +4,7 @@ GPRCLEAN=$(TOOLS)/gprclean
 GDB=$(TOOLS)/arm-eabi-gdb
 OPENOCD=/bin/openocd -f openocd.cfg
 
-main: src/main.adb
+main:
 	$(GPRBUILD) -d -largs -Wl,-Map=map.txt
 flash: main
 	$(OPENOCD) -c "program $< verify reset exit"
@@ -15,4 +15,4 @@ debug:
 clean:
 	$(GPRCLEAN) -r
 	rm -rf obj
-.PHONY: flash server clean debug
+.PHONY: flash server clean debug main
