@@ -7,9 +7,12 @@ with Debug;
 with Motor;
 
 procedure Main is
-   Timeout    : Time               := Clock;
-   Cycle      : constant Time_Span := Seconds (1);
-   Left_Motor : Motor.Motor;
+   type Steps is (One, Two, Three, Four);
+   Timeout     : Time               := Clock;
+   Cycle       : constant Time_Span := Seconds (1);
+   Left_Motor  : Motor.Motor;
+   Right_Motor : Motor.Motor;
+   Step        : Steps              := One;
 begin
    Debug.Output_PLL_DIV5_To_PA8;
    STM32.Board.Initialize_LEDs;
@@ -19,9 +22,28 @@ begin
       (Mode      => Mode_Out, Speed => Speed_2MHz, Output_Type => Push_Pull,
        Resistors => Floating));
 
-   Motor.Configure (Left_Motor, PB4);
+   Motor.Configure (Right_Motor, PB4);
+   Motor.Configure (Left_Motor, PA15);
 
    loop
+      case Step is
+         when One =>
+            Motor.Set (Left_Motor, -1.0);
+            Motor.Set (Right_Motor, 1.0);
+            Step := Two;
+         when Two =>
+            Motor.Set (Left_Motor, 0.0);
+            Motor.Set (Right_Motor, 0.0);
+            Step := Three;
+         when Three =>
+            Motor.Set (Left_Motor, 1.0);
+            Motor.Set (Right_Motor, -1.0);
+            Step := Four;
+         when Four =>
+            Motor.Set (Left_Motor, 0.0);
+            Motor.Set (Right_Motor, 0.0);
+            Step := One;
+      end case;
       Toggle (STM32.Board.All_LEDs);
       Toggle (PI0);
       delay until Timeout;
