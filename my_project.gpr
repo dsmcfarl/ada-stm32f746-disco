@@ -14,6 +14,10 @@ project My_Project is
   for Object_Dir use "obj";
   for Exec_Dir use ".";
   for Create_Missing_Dirs use "True";
+
+   package Check is
+      for Default_Switches ("ada") use ("-rules", "-from=coding_standard");
+   end Check;
   
   package Compiler renames Ada_Drivers_Library.Compiler;
 
