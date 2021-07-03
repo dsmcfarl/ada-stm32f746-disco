@@ -1,0 +1,2 @@
+#!/bin/sh
+conform enforce --commit-ref main --commit-msg-file $1

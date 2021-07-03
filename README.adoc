@@ -1,6 +1,11 @@
 = ada-stm32f746-disco
 Playing around with Ada and an STM32F746 Discovery board.
 
+== Develop
+Link git hooks:
+
+	./scripts/link-githooks
+
 == Style
 See https://en.wikibooks.org/wiki/Ada_Style_Guide[Ada Style Guide].
 Use https://github.com/talos-systems/conform[conform] to enforce certain rules.
