@@ -17,4 +17,8 @@ project My_Project is
   
   package Compiler renames Ada_Drivers_Library.Compiler;
 
+  package Check is
+     for Default_Switches ("ada") use ("-rules", "-from=coding_standard");
+   end Check;
+
 end My_Project;

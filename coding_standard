@@ -1,0 +1,15 @@
+-----------------------------------------------------
+-- This is a sample gnatcheck coding standard file --
+-----------------------------------------------------
+
+--  First, turning on rules, that are directly implemented in gnatcheck
++RAbstract_Type_Declarations
++RAnonymous_Arrays
++RLocal_Packages
++RFloat_Equality_Checks
++REXIT_Statements_With_No_Loop_Name
+
+--  Then, activating compiler checks of interest:
++RStyle_Checks:e
+--  This style check checks if a unit name is present on END keyword that
+--  is the end of the unit declaration

@@ -8,6 +8,40 @@ Link git hooks:
 
 == Style
 See https://en.wikibooks.org/wiki/Ada_Style_Guide[Ada Style Guide].
-Use https://github.com/talos-systems/conform[conform] to enforce certain rules.
 
-	go get github.com/talos-systems/conform
+Basic gnatcheck standards setup in coding_standard. To check run:
+
+	make gnatcheck
+
+This creates obj/gnatcheck.out and obj/gnatcheck-source-list.out.
+
+== Dependencies
+
+=== AdaCore GNAT Community Edition 2019 for x86_64 and ARM ELF
+Using the 2019 version for compatibility with ASIS tools. 2020 and on dropped support for ASIS as AdaCore is migrating to libadalang-tools but they are not mature yet.
+
+https://community.download.adacore.com/v1/0cd3e2a668332613b522d9612ffa27ef3eb0815b?filename=gnat-community-2019-20190517-x86_64-linux-bin&rand=1035
+
+https://community.download.adacore.com/v1/6696259f92b40178ab1cc1d3e005acf705dc4162?filename=gnat-community-2019-20190517-arm-elf-linux64-bin&rand=513
+
+To install, make the downloaded binaries executable then run them and follow the install wizard. Make sure you add the bin paths to your PATH enviroment variable.
+
+=== ASIS
+Tarball was downloaded from. Added to repo because I suspect it may disappear at some point because it is not linked on their download page. See https://stackoverflow.com/questions/62405736/no-gnattest-in-gnat-community-edition:
+
+
+https://community.download.adacore.com/v1/52c69e7295dc301ce670334f8150193ecbec580d?filename=asis-2019-20190517-18AB5-src.tar.gz
+
+To build (don't need to install) just run one of the make targets that depends on it, e.g.:
+
+	make gnatcheck
+
+=== conform
+Use https://github.com/dsmcfarl/conform[conform] to enforce certain rules
+for git commits. Using my own fork of conform because of a bug that I submitted for a PR.
+
+To install:
+
+	git clone https://github.com/dsmcfarl/conform.git
+	cd conform
+	go install
