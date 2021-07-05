@@ -5,6 +5,7 @@ with STM32.Device;  use STM32.Device;
 with STM32.GPIO;    use STM32.GPIO;
 with Debug;
 with Motor;
+with UI;
 
 procedure Main is
    type Steps is (One, Two, Three, Four);
@@ -14,6 +15,8 @@ procedure Main is
    Right_Motor : Motor.Motor;
    Step        : Steps              := One;
 begin
+   UI.Initialize;
+   UI.Put_Line ("UI: initialized");
    Debug.Output_PLL_DIV5_To_PA8;
    STM32.Board.Initialize_LEDs;
    Enable_Clock (GPIO_I);

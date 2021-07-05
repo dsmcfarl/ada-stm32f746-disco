@@ -8,7 +8,8 @@ project My_Project is
   for Runtime ("Ada") use Ada_Drivers_Library'Runtime ("Ada");
   
    for Source_Dirs use (
-     "src/");
+     "src/",
+     "Ada_Drivers_Library/repo/examples/shared/common/gui/");
   for Main use ("main.adb");
   
   for Object_Dir use "obj";

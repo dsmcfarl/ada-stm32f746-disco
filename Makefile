@@ -10,6 +10,7 @@ GNATCHECK=$(ASIS_DIR)/tools/gnatcheck/gnatcheck
 GNATTEST=$(TOOLS)/arm-eabi-gnattest
 GNATTEST_FILES= \
 		src/motor.ads \
+		src/ui.ads \
 		src/debug.ads
 
 main:
@@ -18,7 +19,7 @@ flash: main
 	$(OPENOCD) -c "program $< verify reset exit"
 openocd:
 	$(OPENOCD)
-debug:
+debug: main
 	$(GDB) -x scripts/debug.gdb main
 
 test: gnattest
