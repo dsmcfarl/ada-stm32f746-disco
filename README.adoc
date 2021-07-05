@@ -9,7 +9,7 @@ Link git hooks:
 == Style
 See https://en.wikibooks.org/wiki/Ada_Style_Guide[Ada Style Guide].
 
-Basic gnatcheck standards setup in coding_standard. To check run:
+Basic GNATcheck standards setup in coding_standard. To check run:
 
 	make gnatcheck
 
@@ -24,7 +24,9 @@ https://community.download.adacore.com/v1/0cd3e2a668332613b522d9612ffa27ef3eb081
 
 https://community.download.adacore.com/v1/6696259f92b40178ab1cc1d3e005acf705dc4162?filename=gnat-community-2019-20190517-arm-elf-linux64-bin&rand=513
 
-To install, make the downloaded binaries executable then run them and follow the install wizard. Make sure you add the bin paths to your PATH enviroment variable.
+To install, make the downloaded binaries executable then run them and follow
+the install wizard. Make sure you add the bin paths to your PATH environment
+variable.
 
 === ASIS
 Tarball was downloaded from. Added to repo because I suspect it may disappear at some point because it is not linked on their download page. See https://stackoverflow.com/questions/62405736/no-gnattest-in-gnat-community-edition:
@@ -45,3 +47,50 @@ To install:
 	git clone https://github.com/dsmcfarl/conform.git
 	cd conform
 	go install
+
+== Learnings/Observations
+
+* The elimination of the ASIS tools in the AdaCore Community Edition before the
+  libadalang-tools have been added was a little disappointing and took a lot of
+  research to figure out a work around to be able to use GNATcheck and GNATtest.
+  I ended up reverting to the 2019 version which includes GNATtest and then built
+  the ASIS tools from source to use GNATcheck.
+
+* Unrelated to Ada, but I discovered the
+  https://www.conventionalcommits.org/en/v1.0.0/[conventional commits] standard
+  while setting up this project.
+
+* I became more familiar with OpenOCD. Before, I'd always used
+  https://github.com/stlink-org/stlink, but I was having problems with st-util
+  GDB server with this project. The program kept raising an exception when
+  using st-util whereas it worked fine with OpenOCD. Not sure why. Here are
+  some of the things I learned:
+    - how to create a custom OpenOCD config file that sources a default
+      one and adds to it
+    - how to resume the program automatically when a debugging session
+      detaches with a custom config
+    - When the GDB server is killed, the board gets stuck in a halted state
+      until the board is power cycled. This only happens when utilizing
+      semihosting.
+    - how to use a GDB script to auto attach to a remote target
+      when GDB starts
+
+* Became more familiar with GDB. I learned:
+    - how to re-upload a file to the remote target from within a debug
+      session (load)
+    - how to set commands to run automatically when a breakpoint is hit
+      (cannot do things like next, step, or finish though)
+    - how to define a custom function in a GDB script
+
+* GNAT tools:
+    - gprbuild builds a project using a .gpr file.
+    - gprinstall installs a project. If you use the version from the cross
+      compiler it installs in its install directory by default.
+    - GNATcheck does static analysis of Ada source based on configurable
+      standards and generates a report
+    - GNATtest builds a test harness and stubs and skeleton tests for a
+      specified set of interfaces (or all interfaces).
+    - ada_language_server can be used in vim using coc.nvim to provide a nice
+      development environment. To avoid building ada_language_server you can
+      use the binary that gets installed with AdaCore Community Edition 2021
+      (~/opt/GNAT/2021/libexec/gnatstudio/als/ada_language_server).
