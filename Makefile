@@ -22,16 +22,14 @@ openocd:
 debug: main
 	$(GDB) -x scripts/debug.gdb main
 
-test: gnattest
+test:
+	$(GNATTEST) -P my_project.gpr $(GNATTEST_FILES)
 	$(GPRBUILD) -P obj/gnattest/harness/test_driver.gpr
 	$(GDB) -batch-silent -x scripts/test.gdb obj/gnattest/harness/test_runner
 
-gnatcheck: $(GNATCHECK)
+check: $(GNATCHECK)
 	mkdir -p obj
-	$(GNATCHECK) -P my_project.gpr
-
-gnattest:
-	$(GNATTEST) -P my_project.gpr $(GNATTEST_FILES)
+	$(GNATCHECK) -P my_project.gpr --ignore=scripts/gnatcheck-ignore
 
 $(GNATCHECK): ASIS/asis-2019-20190517-18AB5-src.tar.gz
 	rm -rf $(ASIS_DIR)
@@ -42,4 +40,4 @@ clean:
 	rm -rf obj
 distclean: clean
 	rm -rf ASIS/$(ASIS_DIR)
-.PHONY: flash server clean debug main gnatcheck gnattest test
+.PHONY: flash server clean debug main check test
