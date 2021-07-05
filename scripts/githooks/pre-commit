@@ -46,8 +46,8 @@ EOF
 fi
 
 # run tests
-cd `git rev-parse --show-toplevel`
-make test
+#cd `git rev-parse --show-toplevel`
+#make test
 
 # If there are whitespace errors, print the offending file names and fail.
 exec git diff-index --check --cached $against --
