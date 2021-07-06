@@ -15,5 +15,8 @@ package UI.Test_Data.Tests is
    procedure Test_Put_Line_a61d17 (Gnattest_T : in out Test);
    --  ui.ads:27:4:Put_Line
 
+   procedure Test_Draw_UI_d1dc4b (Gnattest_T : in out Test);
+   --  ui.ads:32:4:Draw_UI
+
 end UI.Test_Data.Tests;
 --  end read only

@@ -36,4 +36,19 @@ package body UI is
       LCD_Std_Out.Put_Line (Msg);
    end Put_Line;
 
+   ----------------------------------------------------------------------------
+   -- Draw_UI
+   ----------------------------------------------------------------------------
+   procedure Draw_UI is
+      package BMP renames HAL.Bitmap;
+      Buffer : constant BMP.Any_Bitmap_Buffer :=
+        (STM32.Board.Display.Hidden_Buffer (1));
+      Main_Rect   : constant BMP.Rect := ((20, 20), 100, 200);
+      Main_Radius : constant Natural  := 10;
+   begin
+      Buffer.Set_Source (BMP.Dim_Grey);
+      BMP.Fill_Rounded_Rect (Buffer.all, Main_Rect, Main_Radius);
+      STM32.Board.Display.Update_Layer (1, True);
+   end Draw_UI;
+
 end UI;

@@ -68,14 +68,34 @@ package body UI.Test_Data.Tests is
       pragma Unreferenced (Gnattest_T);
 
    begin
-
-      -- just a functional test to exercise it:
       Put_Line ("test");
+      -- just a functional test to exercise it:
       -- AUnit.Assertions.Assert
       --   (Gnattest_Generated.Default_Assert_Value, "Test not implemented.");
 
 --  begin read only
    end Test_Put_Line;
+--  end read only
+
+
+--  begin read only
+   procedure Test_Draw_UI (Gnattest_T : in out Test);
+   procedure Test_Draw_UI_d1dc4b (Gnattest_T : in out Test) renames Test_Draw_UI;
+--  id:2.2/d1dc4b42420ed619/Draw_UI/1/0/
+   procedure Test_Draw_UI (Gnattest_T : in out Test) is
+   --  ui.ads:32:4:Draw_UI
+--  end read only
+
+      pragma Unreferenced (Gnattest_T);
+
+   begin
+      Draw_UI;
+      -- just a functional test to exercise it:
+      -- AUnit.Assertions.Assert
+      --   (Gnattest_Generated.Default_Assert_Value, "Test not implemented.");
+
+--  begin read only
+   end Test_Draw_UI;
 --  end read only
 
 --  begin read only
