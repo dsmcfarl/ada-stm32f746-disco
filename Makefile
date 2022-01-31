@@ -11,6 +11,7 @@ GNATTEST=$(TOOLS)/arm-eabi-gnattest
 GNATTEST_FILES= \
 		src/motor.ads \
 		src/ui.ads \
+		src/usfs.ads \
 		src/debug.ads
 
 main:
